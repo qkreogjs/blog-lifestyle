@@ -2,37 +2,45 @@ import type { Metadata } from "next";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const SITE_NAME = "ライフインサイト";
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3333";
+const SITE_DESC = "ライフスタイル・旅行・文化トレンド";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3336";
 
 export const metadata: Metadata = {
   title: { default: SITE_NAME, template: `%s | ${SITE_NAME}` },
-  description: "ライフインサイトの最新情報をお届けします。",
-  openGraph: { siteName: SITE_NAME, locale: "ja_JP", url: `${SITE_URL}/ja` },
+  description: SITE_DESC,
+  openGraph: { siteName: SITE_NAME, locale: "ja_JP", url: SITE_URL },
 };
 
 export default function JaLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <header className="border-b border-gray-100 sticky top-0 bg-white/95 backdrop-blur z-10">
-        <div className="max-w-3xl mx-auto px-4 py-4 flex items-center justify-between">
-          <a href="/ja" className="text-xl font-bold text-gray-900">{SITE_NAME}</a>
-          <div className="flex items-center gap-4">
-            <nav className="flex gap-4 text-sm text-gray-500">
-              <a href="/ja" className="hover:text-gray-900 transition-colors">ホーム</a>
-              <a href="/ja/blog" className="hover:text-gray-900 transition-colors">記事一覧</a>
-            </nav>
+      <header style={{ backgroundColor: "#FFFBF5", borderBottom: "1px solid #FDE8D0" }} className="sticky top-0 backdrop-blur z-10">
+        <div className="max-w-5xl mx-auto px-6 py-4">
+          {/* センター揃えマガジンヘッダー */}
+          <div className="flex items-center justify-between">
             <LanguageSwitcher currentLang="ja" />
+            <a href="/ja" className="text-center">
+              <div style={{ color: "var(--color-primary)", fontStyle: "italic" }} className="text-xs tracking-widest mb-0.5">ライフ · 旅行 · カルチャー</div>
+              <div style={{ color: "#1C1917" }} className="text-2xl font-black tracking-tight">ライフインサイト</div>
+            </a>
+            <nav className="flex gap-5 text-sm" style={{ color: "#78716C" }}>
+              <a href="/ja" className="hover:text-orange-500 transition-colors">ホーム</a>
+              <a href="/ja/blog" className="hover:text-orange-500 transition-colors">全記事</a>
+            </nav>
           </div>
         </div>
+        <div style={{ height: "2px", background: "linear-gradient(90deg, var(--color-primary), #FBBF24, var(--color-primary))" }} />
       </header>
-      <main className="max-w-3xl mx-auto px-4 py-10 min-h-[80vh]">
+      <main className="max-w-5xl mx-auto px-6 py-10 min-h-[80vh]">
         {children}
       </main>
-      <footer className="border-t border-gray-100 mt-20 py-8 text-center text-sm text-gray-400">
-        <p>© {new Date().getFullYear()} {SITE_NAME}. All rights reserved.</p>
-        <div className="flex justify-center gap-4 mt-2">
-          <a href="/privacy" className="hover:text-gray-600">プライバシーポリシー</a>
-          <a href="/terms" className="hover:text-gray-600">利用規約</a>
+      <footer style={{ backgroundColor: "#FFF7ED", borderTop: "1px solid #FDE8D0" }} className="mt-20 py-10 text-center">
+        <div style={{ color: "var(--color-primary)", fontStyle: "italic" }} className="text-xs tracking-widest mb-1">ライフ · 旅行 · カルチャー</div>
+        <div style={{ color: "#1C1917" }} className="font-black text-lg mb-2">ライフインサイト</div>
+        <p style={{ color: "#78716C" }} className="text-xs mb-3">© {new Date().getFullYear()} ライフインサイト. All rights reserved.</p>
+        <div className="flex justify-center gap-4">
+          <a href="/ja/privacy" style={{ color: "#A8A29E" }} className="text-xs hover:text-orange-500 transition-colors">プライバシーポリシー</a>
+          <a href="/ja/terms" style={{ color: "#A8A29E" }} className="text-xs hover:text-orange-500 transition-colors">利用規約</a>
         </div>
       </footer>
     </>
